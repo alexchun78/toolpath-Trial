@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolPathPainter", "ToolPathPainter\ToolPathPainter.csproj", "{8D9E29FD-8E72-4FD1-B18F-BC1CA6920A07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "clipper_library", "clipper_library\clipper_library.csproj", "{9B062971-A88E-4A3D-B3C9-12B78D15FA66}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8D9E29FD-8E72-4FD1-B18F-BC1CA6920A07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D9E29FD-8E72-4FD1-B18F-BC1CA6920A07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D9E29FD-8E72-4FD1-B18F-BC1CA6920A07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D9E29FD-8E72-4FD1-B18F-BC1CA6920A07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B062971-A88E-4A3D-B3C9-12B78D15FA66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B062971-A88E-4A3D-B3C9-12B78D15FA66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B062971-A88E-4A3D-B3C9-12B78D15FA66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B062971-A88E-4A3D-B3C9-12B78D15FA66}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {372AD2DA-17B6-45F8-9BDF-130F84C16EA4}
+	EndGlobalSection
+EndGlobal

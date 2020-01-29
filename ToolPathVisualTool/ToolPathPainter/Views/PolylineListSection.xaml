@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="ToolPathPainter.Views.PolylineListSection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ToolPathPainter.Views"
+             DataContext="{Binding Source={StaticResource Locator}, Path=PolylineListSection}"
+             mc:Ignorable="d" 
+             d:DesignHeight="720" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="23"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Border x:Name="mediaBackground" Grid.RowSpan="2" BorderThickness="5,0,5,5">
+            <Border.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF4E4E4E" Offset="1"/>
+                    <GradientStop Color="White"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF2F2F2F" Offset="1"/>
+                    <GradientStop Color="#FF414141"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <Grid x:Name="partVideo" Margin="10,0,10,12" Grid.Row="1">
+            <Border x:Name="bdVideo" BorderBrush="#FF606060" BorderThickness="1" Grid.Row="1" Background="Black">
+                <!--<ListBox x:Name="lbList" Background="Black" Foreground="White" FontSize="12">
+                    <ListBox.Resources>
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="Content" Value="{Binding FileName}"/>
+                        </Style>
+                    </ListBox.Resources>
+                </ListBox>-->
+            </Border>
+        </Grid>
+        <StackPanel x:Name="partWindow" HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,3,13,3" Background="#00000000">
+            <Button x:Name="g_btnExit" Content="close" VerticalAlignment="Top" FontSize="9" HorizontalAlignment="Left" Margin="3,0,0,0"                     
+                    Command="{Binding ExitCommand}"/>
+        </StackPanel>
+        <ResizeGrip x:Name="rGrip" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="1" Margin="0,0,2,2"/>
+    </Grid>
+</UserControl>

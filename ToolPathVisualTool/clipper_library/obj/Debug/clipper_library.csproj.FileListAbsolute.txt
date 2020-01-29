@@ -1,0 +1,15 @@
+C:\Users\alex\source\repos\testapp\clipper_library\bin\Debug\clipper_library.dll
+C:\Users\alex\source\repos\testapp\clipper_library\bin\Debug\clipper_library.pdb
+C:\Users\alex\source\repos\testapp\clipper_library\obj\Debug\clipper_library.csprojAssemblyReference.cache
+C:\Users\alex\source\repos\testapp\clipper_library\obj\Debug\clipper_library.dll
+C:\Users\alex\source\repos\testapp\clipper_library\obj\Debug\clipper_library.pdb
+I:\DATA\_dev\visual-studio-csharp\testapp\clipper_library\bin\Debug\clipper_library.dll
+I:\DATA\_dev\visual-studio-csharp\testapp\clipper_library\bin\Debug\clipper_library.pdb
+I:\DATA\_dev\visual-studio-csharp\testapp\clipper_library\obj\Debug\clipper_library.csprojAssemblyReference.cache
+I:\DATA\_dev\visual-studio-csharp\testapp\clipper_library\obj\Debug\clipper_library.dll
+I:\DATA\_dev\visual-studio-csharp\testapp\clipper_library\obj\Debug\clipper_library.pdb
+I:\DATA\_dev\visual-studio-csharp\ToolPathVisualTool\clipper_library\bin\Debug\clipper_library.dll
+I:\DATA\_dev\visual-studio-csharp\ToolPathVisualTool\clipper_library\bin\Debug\clipper_library.pdb
+I:\DATA\_dev\visual-studio-csharp\ToolPathVisualTool\clipper_library\obj\Debug\clipper_library.csprojAssemblyReference.cache
+I:\DATA\_dev\visual-studio-csharp\ToolPathVisualTool\clipper_library\obj\Debug\clipper_library.dll
+I:\DATA\_dev\visual-studio-csharp\ToolPathVisualTool\clipper_library\obj\Debug\clipper_library.pdb

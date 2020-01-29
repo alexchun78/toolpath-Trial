@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="ToolPathPainter.Views.StatusBarSection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ToolPathPainter.Views"
+             DataContext="{Binding Source={StaticResource Locator}, Path=StatusBarSection}"
+             mc:Ignorable="d" 
+             d:DesignHeight="23" d:DesignWidth="800">
+    <Grid>
+        <StackPanel x:Name="partWindow" Orientation="Horizontal" Background="#00000000" d:LayoutOverrides="Width" HorizontalAlignment="Left" Margin="10,0,0,1">
+            <Button x:Name="btnMin" FontSize="9" Margin="2,0,0,0" Content="min"/>
+            <Button x:Name="btnMax" FontSize="9" Margin="2,0,0,0" Content="max"/>
+            <Button x:Name="g_btnExit" FontSize="9" Command="{Binding ExitCommand}"
+                    Margin="2,0,0,0" Content="close"/>
+            <Rectangle Width="1" Margin="3,-2,1,0" Fill="Black" Height="15"/>
+        </StackPanel>
+        <!--<Image HorizontalAlignment="Left" Margin="13,0,0,1" Source="../Images/logo_small.png"/>-->
+    </Grid>
+</UserControl>
