@@ -1,0 +1,6 @@
+I:\DATA\_dev\visual-studio-csharp\ToolPathVisualTool\Farseer Physics Engine 3.5\bin\Debug\FarseerPhysics.XML
+I:\DATA\_dev\visual-studio-csharp\ToolPathVisualTool\Farseer Physics Engine 3.5\bin\Debug\FarseerPhysics.dll
+I:\DATA\_dev\visual-studio-csharp\ToolPathVisualTool\Farseer Physics Engine 3.5\bin\Debug\FarseerPhysics.pdb
+I:\DATA\_dev\visual-studio-csharp\ToolPathVisualTool\Farseer Physics Engine 3.5\obj\Debug\Farseer Physics.csprojAssemblyReference.cache
+I:\DATA\_dev\visual-studio-csharp\ToolPathVisualTool\Farseer Physics Engine 3.5\obj\Debug\FarseerPhysics.dll
+I:\DATA\_dev\visual-studio-csharp\ToolPathVisualTool\Farseer Physics Engine 3.5\obj\Debug\FarseerPhysics.pdb

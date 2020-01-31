@@ -64,6 +64,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Common\TreeCollection.cs" />
+    <Compile Include="Models\CPolylineClipper.cs" />
+    <Compile Include="Models\zIOModule.cs" />
     <Compile Include="PolylineListWindow.xaml.cs">
       <DependentUpon>PolylineListWindow.xaml</DependentUpon>
     </Compile>
@@ -162,14 +165,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Common\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\clipper_library\clipper_library.csproj">
       <Project>{9b062971-a88e-4a3d-b3c9-12b78d15fa66}</Project>
       <Name>clipper_library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Farseer Physics Engine 3.5\Farseer Physics.csproj">
+      <Project>{a4610e4c-dd34-428b-babb-779ca0b5993a}</Project>
+      <Name>Farseer Physics</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

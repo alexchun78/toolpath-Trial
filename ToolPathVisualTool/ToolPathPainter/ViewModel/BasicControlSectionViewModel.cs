@@ -9,9 +9,8 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Forms;
 using System.IO;
-
-//using Microsoft.Win32;
-
+using ToolPathPainter.Common;
+using ToolPathPainter.Models;
 
 namespace ToolPathPainter.ViewModel
 {
@@ -22,9 +21,13 @@ namespace ToolPathPainter.ViewModel
 
         public BasicControlSectionViewModel()
         {
+            m_IOModule = new zIOModule();
+
             PolylineListCommand = new RelayCommand(PolylineListToggle);
             FileImportCommand = new RelayCommand(FileImport);
         }
+
+        private zIOModule m_IOModule;
 
         private void PolylineListToggle()
         {
@@ -49,53 +52,30 @@ namespace ToolPathPainter.ViewModel
             string fileName = string.Empty;
             string fileContent = string.Empty;
 
-            bool bRtn = ShowFileDialog(ref filePath, ref fileName, ref fileContent);
-            if (bRtn == false)
+            try 
+            {
+                // [1] show dialog and import file content
+                bool bRtn = m_IOModule.ShowFileDialog(ref filePath, ref fileName, ref fileContent);
+                if (bRtn == false)
+                    throw new FileFormatException("Failed to import file!!");
+
+                // [2] compose hierachy dataset
+                m_IOModule.ComposeHierarchyWKTData(fileContent);
+
+                // [3] compose polyline dataset
+                bRtn = m_IOModule.ComposeClipperPolylineData();
+                if (bRtn == false)
+                    throw new NullReferenceException("ClipperPolyline data is empty!");
+
+                // [4] bind polyline data to canvas
+
+            }
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message + "Exception caught.", "[ERROR]", MessageBoxButtons.OK);
+                //Console.WriteLine("{0} Exception caught.", e);
                 return;
-
-            // WKT(Well - Known Text) Geometry
-            // MULTIPOLYGON(((1 1,5 1,5 5,1 5,1 1),(2 2, 3 2, 3 3, 2 3,2 2)),((3 3,6 2,3 3))) 
-
-            // TO DO : 파일을 불러오고 -> 폴리곤 데이터들을 저장하고 -> 점으로 표현하고 -> 라인으로 그린다
-            Stack<int> testStack = new Stack<int>();
-            
-            //var find = fileContent.
-            foreach (var item in fileContent)
-            {
-                char iter = item;
-                int a = 0;
             }
-
-            System.Windows.Forms.MessageBox.Show(fileContent, "File Content at path: " + filePath, MessageBoxButtons.OK);
-
         }
-
-        private bool ShowFileDialog(ref string filePath, ref string fileName, ref string fileContent)
-        {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.InitialDirectory = "c:\\";
-                openFileDialog.Filter = "import files (*.txt,*.dat)|*.txt;*.dat;|All files (*.*)|*.*";
-                openFileDialog.Multiselect = false; // 추후 다중 선택기능 추가
-                openFileDialog.RestoreDirectory = true;
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    filePath = openFileDialog.FileName;
-                    fileName = openFileDialog.SafeFileName;
-
-                    var fileStream = openFileDialog.OpenFile();
-                    using (StreamReader reader = new StreamReader(fileStream))
-                    {
-                        fileContent = reader.ReadToEnd();
-                    }
-                }
-                else
-                    return false;
-            }
-
-            return true;
-        }
-
     }
 }
