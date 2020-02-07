@@ -22,7 +22,6 @@ namespace ToolPathPainter.ViewModel
         public BasicControlSectionViewModel()
         {
             m_IOModule = new zIOModule();
-
             PolylineListCommand = new RelayCommand(PolylineListToggle);
             FileImportCommand = new RelayCommand(FileImport);
         }
@@ -67,7 +66,25 @@ namespace ToolPathPainter.ViewModel
                 if (bRtn == false)
                     throw new NullReferenceException("ClipperPolyline data is empty!");
 
-                // [4] bind polyline data to canvas
+                CPolylineClipper temp = new CPolylineClipper();
+                foreach (var item in m_IOModule.ClipperPolylines)
+                {
+                    ClipperLib.IntPoint point_temp;
+                    foreach (var point in item.Path)
+                    {
+                        point_temp.X = point.X;
+                        point_temp.Y = point.Y;
+                        temp.Path.Add(point_temp);
+                    }
+                    temp.ShellIndex = item.ShellIndex;
+                    temp.InnerOrOuter = item.InnerOrOuter;
+                    temp.HoleOrOutline = item.HoleOrOutline;
+                   // CanvasFieldViewModel.getInstance().m_polylineClipper.Add(temp);
+                }
+              //  var nmm = CanvasFieldViewModel.getInstance().m_polylineClipper;
+                // [4] bind polyline data to canvas?????
+
+               // CanvasFieldViewModel.getInstance().Draw();
 
             }
             catch (Exception e)

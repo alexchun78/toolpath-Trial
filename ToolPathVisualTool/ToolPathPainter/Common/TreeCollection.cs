@@ -10,10 +10,12 @@ namespace ToolPathPainter.Common
     public class TreeNode<T> 
     {
         private readonly T _value;
+        private bool _bValueFlag;
         private readonly List<TreeNode<T>> _children = new List<TreeNode<T>>();
-        public TreeNode (T value)
+        public TreeNode (T value, bool flag)
         {
             _value = value;
+            _bValueFlag = flag;
         }
 
         public TreeNode<T> this[int i] // operator []
@@ -38,17 +40,20 @@ namespace ToolPathPainter.Common
             }
         }
 
-        public ReadOnlyCollection<TreeNode<T>> Children
+        public bool ValueFlag
         {
-            get 
-            {
-                return _children.AsReadOnly();
-            }
+            get => _bValueFlag;
+            set => _bValueFlag = value;
         }
 
-        public TreeNode<T> AddChild(T value)
+        public List<TreeNode<T>> Children
         {
-            var node = new TreeNode<T>(value)
+            get => _children;
+        }
+
+        public TreeNode<T> AddChild(T value, bool bFlag)
+        {
+            var node = new TreeNode<T>(value, bFlag)
             {
                 Parent = this
             };
@@ -61,51 +66,14 @@ namespace ToolPathPainter.Common
         {
             return _children.Remove(node);
         }
-        //public TreeNode<T>[] AddChildren(params T[] values)
-        //{
-        //    return values.Select(AddChild).ToArray();
-        //}
 
-
-        //public void Traverse (Action<T> action)
-        //{
-        //    action(Value);
-        //    foreach (var child in _children)
-        //        child.Traverse(action);
-        //}
-        //public IEnumerable<T> Flatten()
-        //{
-        //    return new[] { Value }.Concat(_children.SelectMany(x => x.Flatten()));
-        //}
-    }
-
-    public class Tree<T>
-    {
-        private TreeNode<T> m_root;
-        private int m_count; // count 작업이 필요하다.
-
-        public Tree(T value)
-        {
-            m_root = new TreeNode<T>(value);
-            m_count = 0;
-        }
-
-        public TreeNode<T> Root
-        {
-            get => m_root;
-            set => m_root = value;
-        }
-
-        public int Count
-        { 
-            get => m_count;
-            set => m_count = value;
-        }
-
-        public TreeNode<T> AddChild(T value)
-        {
-            m_count++;
-            return m_root.AddChild(value);
+        public void Traverse(Action<T, bool> action)
+        {          
+            action(Value, ValueFlag);
+            foreach (var child in _children)
+            {
+                child.Traverse(action);
+            }
         }
     }
 }

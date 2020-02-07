@@ -9,20 +9,20 @@ using System.Windows.Forms;
 using System.IO;
 using ToolPathPainter.Models;
 using ToolPathPainter.Common;
+using ClipperLib;
 
 namespace ToolPathPainter.Models
 {
     public class zIOModule
     {
-        private Tree<int> m_wktRootNode = null; // wkt 데이터를 계층화하여 가지고 있는 tree data structure
+        private TreeNode<int> m_wktRootNode = null;
         private List<CPolylineClipper> m_clipperPolylines = null; // 
         public zIOModule()
         {
-            m_wktRootNode = new Tree<int>(0);
             m_clipperPolylines = new List<CPolylineClipper>();
         }
 
-        public Tree<int> WKTRootNode
+        public TreeNode<int> WKTRootNode
         {
             get => m_wktRootNode;
             set => m_wktRootNode = value;
@@ -65,45 +65,84 @@ namespace ToolPathPainter.Models
 
         public bool ComposeClipperPolylineData()
         {
-            int a = m_clipperPolylines.Count;
-
+            ClipperLib.IntPoint point_temp;
+            point_temp.X = 0;
+            point_temp.Y = 0;
+            int cnt = 0;
+            List<IntPoint> path_temp = new List<IntPoint>();
+            // [1] clipper polyline 형식으로 바꾸기
+            m_wktRootNode.Traverse(
+                            (value, bFlag) =>
+                            {
+                                if (bFlag)
+                                {
+                                    if (cnt == 0)
+                                    {
+                                        point_temp.X = value;
+                                    }
+                                    else
+                                    {
+                                        point_temp.Y = value;
+                                        path_temp.Add(point_temp);
+                                    }
+                                    cnt++;
+                                    cnt = 2 - cnt;
+                                }
+                                else
+                                {
+                                    if (path_temp.Count > 0)
+                                    {
+                                        CPolylineClipper tc = new CPolylineClipper(path_temp);
+                                        m_clipperPolylines.Add(tc);
+                                        path_temp.Clear();
+                                    }
+                                }
+                            }
+                            );
+            if (path_temp.Count > 0)
+            {
+                CPolylineClipper tc = new CPolylineClipper(path_temp);
+                m_clipperPolylines.Add(tc);
+                path_temp.Clear();
+            }
             return true;
         }
 
         public void ComposeHierarchyWKTData(string fileContent)
         {
-            // tree의 count를 체크해서 예외처리해주어야 한다.
+            // [NOTE] tree의 count를 체크해서 예외처리해주어야 한다.
+
             // WKT(Well - Known Text) Geometry
             // MULTIPOLYGON(((100 100,500 100,500 500,100 500,100 100),(200 200, 3121 2221, 3332 32312, 212 3112,2212 211)),((3332 3121,6112 2333,2113 2213))) 
 
-            int level = 1;
+            int level = 0;
             int nPos = 0;
-            TreeNode<int> node = m_wktRootNode.AddChild(level);
+            TreeNode<int> node = new TreeNode<int>(level, false); 
             Stack<char> charStack = new Stack<char>();
             for (int idx = fileContent.IndexOf('(', 0); idx < fileContent.Length; idx++)
             {
                 switch (fileContent[idx])
                 {
                     case '(':
-                        node = node.AddChild(++level);
+                        node = node.AddChild(++level, false);
                         break;
                     case ')':
                         if (internal_ConvertCharStack2Int(ref charStack, ref nPos))
-                            node.AddChild(nPos);
-
+                            node.AddChild(nPos, true);
                         node = node.Parent;
                         level--;
                         break;
                     case ',':
                     case ' ':
                         if (internal_ConvertCharStack2Int(ref charStack, ref nPos))
-                            node.AddChild(nPos);
+                            node.AddChild(nPos, true);
                         break;
                     default:
                         charStack.Push(fileContent[idx]);
                         break;
                 }
             }
+            m_wktRootNode = node;
         }
 
         public bool internal_ConvertCharStack2Int(ref Stack<char> inStack, ref int pos)
@@ -131,8 +170,5 @@ namespace ToolPathPainter.Models
             }
             return true;
         }
-
-        
-
     }
 }
